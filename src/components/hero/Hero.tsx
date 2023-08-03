@@ -7,12 +7,12 @@ import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-type Movie = {
+export type Movie = {
     poster: string,
     title: string,
     backdrops: any,
     trailerLink: string,
-    id: string,
+    imdbId: string,
 }
 
 type Movies = {
@@ -53,7 +53,7 @@ const Hero = ({movies}: Movies) => {
                                                 </div>
                                             </Link>
                                             <div className="movie-review-button-container">
-                                                <Button variant='info' onClick={() => reviews(movie.id)}>Reviews</Button>
+                                                <Button variant='info' onClick={() => reviews(movie.imdbId)}>Reviews</Button>
                                             </div>
                                         </div>
                                     </div>
@@ -68,4 +68,4 @@ const Hero = ({movies}: Movies) => {
   )
 }
 
-export default Hero
+export default Hero;

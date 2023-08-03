@@ -6,13 +6,29 @@ import ReviewForm from "../reviewForm/ReviewForm";
 
 import React from 'react'
 
-const Reviews = ({getMovieData, movie, reviews, setReviews}: any) => {
+export interface Review {
+    body: string;
+}
+  
+interface Movie {
+    poster: string;
+}
+
+interface ReviewsProps {
+    getMovieData: (movieId: string) => void;
+    movie: Movie;
+    reviews: Review[];
+    setReviews: React.Dispatch<React.SetStateAction<Review[]>>;
+}
+
+const Reviews = ({getMovieData, movie, reviews, setReviews}: ReviewsProps) => {
     const revText = useRef();
     let params = useParams();
-    const movieId = params.movieId;
+    const movieId = params.movieId as string;
+    getMovieData(movieId);
 
     useEffect(() => {
-        getMovieData(movieId);
+        console.log("Here");
     }, [])
 
     const addReview = async (e: any) => {
