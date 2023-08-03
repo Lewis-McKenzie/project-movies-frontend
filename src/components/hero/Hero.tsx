@@ -4,32 +4,35 @@ import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 type Movie = {
     poster: string,
     title: string,
     backdrops: any,
     trailerLink: string,
+    id: string,
 }
 
 type Movies = {
     movies: Movie[]
 }
 
-interface MovieCardStyle {
-    '--img': string;
-}
-
 const Hero = ({movies}: Movies) => {
+
+    const navigate = useNavigate();
+
+    function reviews(movieId: any) {
+        navigate(`/Reviews/${movieId}`);
+    }
+
   return (
     <div className='movie-carousel-container'>
         <Carousel>
             {
                 movies.map((movie: Movie) => {
                     const backgroundImage = movie.backdrops && movie.backdrops.length > 0 ? `url(${movie.backdrops[0]})` : 'none';
-          
-                    // Cast the inline style object to the defined MovieCardStyle
                     const cardStyle = { '--img': backgroundImage } as React.CSSProperties;
           
                     return (
@@ -49,6 +52,9 @@ const Hero = ({movies}: Movies) => {
                                                     <FontAwesomeIcon className="play-button-icon" icon={faCirclePlay}/>
                                                 </div>
                                             </Link>
+                                            <div className="movie-review-button-container">
+                                                <Button variant='info' onClick={() => reviews(movie.id)}>Reviews</Button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
