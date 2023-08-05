@@ -11,10 +11,18 @@ import Reviews from './components/reviews/Reviews';
 import { Movie } from './components/hero/Hero';
 import { Review } from './components/reviews/Reviews';
 
+const ini_movie: Movie = {
+  poster: "",
+  title: "",
+  backdrops: "",
+  trailerLink: "",
+  imdbId: "",
+}
+
 function App() {
 
   const [movies, setMovies] = useState([]);
-  const [movie, setMovie] = useState<Movie>();
+  const [movie, setMovie] = useState<Movie>(ini_movie);
   const [reviews, setReviews] = useState<Review[]>([]);
 
   const getMovies = async () => {
@@ -32,12 +40,13 @@ function App() {
   const getMovieData = async (movieId: any) => {
     try {
       const response = await api.get(`api/v1/movies/${movieId}`);
-
+      
       const singleMovie = response.data;
+      console.log(singleMovie);
 
       setMovie(singleMovie);
       
-      setReviews(singleMovie.setReviews)
+      setReviews(singleMovie.reviewIds)
     }
     catch (err) {
       console.log(err);

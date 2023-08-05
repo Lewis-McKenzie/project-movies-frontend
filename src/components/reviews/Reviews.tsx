@@ -25,11 +25,10 @@ const Reviews = ({getMovieData, movie, reviews, setReviews}: ReviewsProps) => {
     const revText = useRef();
     let params = useParams();
     const movieId = params.movieId as string;
-    getMovieData(movieId);
 
     useEffect(() => {
-        console.log("Here");
-    }, [])
+        getMovieData(movieId);
+    }, []);
 
     const addReview = async (e: any) => {
         e.preventDefault();
