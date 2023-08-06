@@ -36,7 +36,7 @@ const Reviews = ({getMovieData, movie, reviews, setReviews}: ReviewsProps) => {
         const rev: any = revText.current;
 
         try {
-            const response = await api.post("/api/v1/reviews", {reviewBody:rev.value, id: movieId});
+            const response = await api.post("/api/v1/reviews", {body:rev.value, movie_id: movieId});
 
             const updatedReviews = [...reviews, {body:rev.value}];
 
